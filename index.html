@@ -246,7 +246,7 @@ table.t th{background:var(--acc-soft);color:var(--ink)}
 (function(){
 'use strict';
 // ---------- config ----------
-var SHARE_URL = 'https://claude.ai/artifact/7kupSFd25fW825fXEjS7Xm'; // public link for parents (used when not on the school's own host)
+var SHARE_URL = 'https://alialx2008-sudo.github.io/revision/'; // public link for parents (used when not on the school's own host)
 var SUBJECTS = {
   'arabic-a': {name:'اللُّغَةُ العَرَبِيَّةُ', sub:'لِلنّاطِقينَ بِها', en:'Arabic Language', ensub:'Native Speakers', cls:'p-a', glyph:'ع', desc:'القِراءَةُ وَالنُّصوصُ وَالنَّحْوُ وَالإِمْلاءُ وَالبَلاغَةُ وَالتَّعْبيرُ.'},
   'arabic-b': {name:'اللُّغَةُ العَرَبِيَّةُ', sub:'لِغَيْرِ النّاطِقينَ بِها', en:'Arabic Language', ensub:'Non-Native Speakers', cls:'p-b', glyph:'أ', desc:'فَهْمُ المَقْروءِ وَالمُفْرَداتُ وَالتَّراكيبُ وَالإِمْلاءُ، مَعَ تَرْجَمَةٍ إِنْجِليزِيَّةٍ لِلتَّعْليماتِ.'},
@@ -724,7 +724,7 @@ function pdfLink(url, name){
 
 // ---------- student rating -> Google Sheet ----------
 // Paste the Google Apps Script Web App URL between the quotes (see the setup guide):
-var SHEET_URL = '';
+var SHEET_URL = 'https://script.google.com/macros/s/AKfycbz8zy9mxk4fDeZ7aYDVVGrXE_Sr0gS5gkYz-FvgTWfcWbdxnAYS3huS9Bv_KWniRtzN/exec';
 var FACES = [['😢','حَزينٌ','Sad'],['😕','لَمْ تُعْجِبْني','Not great'],['😐','عادِيَّةٌ','Okay'],['🙂','جَميلَةٌ','Good'],['😍','رائِعَةٌ جِدًّا','Amazing']];
 function sendRating(d){
   try { var all = load('ratings', []); all.push(d); save('ratings', all.slice(-50)); } catch(e){}
