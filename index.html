@@ -1,0 +1,836 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui}img{max-width:100%}[hidden]{display:none!important}</style><title>منصات مراجعة جيمس وستمنستر</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;600;700&family=Reem+Kufi:wght@500;600;700&family=Noto+Sans:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+/* Layout: school header band → platform hub → grade shelf → one revision at a time, section by section, in reading-width cards */
+:root{
+  --paper:#f4f7fb; --surface:#ffffff; --sunk:#eaf0f7; --ink:#13294b; --text:#1d2a3a; --muted:#5a6a80; --line:#d6dfea;
+  --navy:#16325c; --gold:#b98a2c; --gold-soft:#fbf3df;
+  --ok:#1d8a4e; --ok-soft:#e3f5ea; --bad:#c2412d; --bad-soft:#fdeceb;
+  --acc:#0f7a5c; --acc-soft:#e2f3ec;
+  --f-body:"Noto Naskh Arabic","Traditional Arabic","Arial",serif;
+  --f-disp:"Reem Kufi","Noto Naskh Arabic",sans-serif;
+  --f-en:"Noto Sans","Segoe UI",Arial,sans-serif;
+  --r:14px; --shadow:0 1px 2px rgba(19,41,75,.06),0 6px 18px rgba(19,41,75,.06);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0f1724; --surface:#162133; --sunk:#1c2a40; --ink:#e7eef8; --text:#dbe4f0; --muted:#9db0c8; --line:#2a3b55;
+  --navy:#0b1a30; --gold:#e0b45a; --gold-soft:#2c2513; --ok:#43c07c; --ok-soft:#14301f; --bad:#f0806b; --bad-soft:#3a1b17;
+  --acc-soft:#173328; color-scheme:dark; --shadow:none}}
+:root[data-theme="dark"]{
+  --paper:#0f1724; --surface:#162133; --sunk:#1c2a40; --ink:#e7eef8; --text:#dbe4f0; --muted:#9db0c8; --line:#2a3b55;
+  --navy:#0b1a30; --gold:#e0b45a; --gold-soft:#2c2513; --ok:#43c07c; --ok-soft:#14301f; --bad:#f0806b; --bad-soft:#3a1b17;
+  --acc-soft:#173328; color-scheme:dark; --shadow:none}
+body{background:var(--paper);color:var(--text);font-family:var(--f-body);font-size:17px;line-height:1.85;direction:rtl}
+body[data-subject="arabic-a"]{--acc:#0f7a5c}
+body[data-subject="arabic-b"]{--acc:#1f63a8}
+body[data-subject="social"]{--acc:#9a5b12}
+body[data-subject="islamic-a"]{--acc:#6b4fb3}
+body[data-subject="islamic-b"]{--acc:#0e7c86}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) body[data-subject="arabic-a"]{--acc:#4cc59a}:root:not([data-theme="light"]) body[data-subject="arabic-b"]{--acc:#6aa8ec}:root:not([data-theme="light"]) body[data-subject="social"]{--acc:#e0a24e}:root:not([data-theme="light"]) body[data-subject="islamic-a"]{--acc:#a993ec}:root:not([data-theme="light"]) body[data-subject="islamic-b"]{--acc:#4fc3cc}:root:not([data-theme="light"]) body:not([data-subject]){--acc:#4cc59a}}
+:root[data-theme="dark"] body[data-subject="arabic-a"]{--acc:#4cc59a}:root[data-theme="dark"] body[data-subject="arabic-b"]{--acc:#6aa8ec}:root[data-theme="dark"] body[data-subject="social"]{--acc:#e0a24e}:root[data-theme="dark"] body[data-subject="islamic-a"]{--acc:#a993ec}:root[data-theme="dark"] body[data-subject="islamic-b"]{--acc:#4fc3cc}
+*{box-sizing:border-box}
+.wrap{max-width:860px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+button,select,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.en{font-family:var(--f-en);direction:ltr;unicode-bidi:isolate;font-size:.78em;color:var(--muted)}
+
+/* header */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--navy)}
+.masthead{background:var(--navy);color:#fff}
+.masthead .wrap{display:flex;align-items:center;gap:14px;padding-block:12px;flex-wrap:wrap}
+.crest{width:54px;height:54px;border-radius:50%;background:#fff;object-fit:contain;flex:none;border:2px solid var(--gold)}
+.mast-text{flex:1;min-width:0}
+.mast-school{font-family:var(--f-disp);font-weight:700;font-size:1.15rem;line-height:1.3;margin:0}
+.mast-dept{font-size:.86rem;opacity:.85;margin:0;line-height:1.5}
+.mast-dept .en{color:#c8d4e6}
+.mast-logos{display:flex;gap:8px;align-items:center}
+.mast-logos img{height:30px;background:#fff;border-radius:6px;padding:3px 6px}
+.subbar{background:var(--surface);border-bottom:1px solid var(--line);position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+.subbar .wrap{display:flex;align-items:center;gap:8px;padding-block:8px;flex-wrap:wrap}
+.crumb{flex:1;min-width:0;font-family:var(--f-disp);font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.crumb small{color:var(--acc);font-weight:600}
+.tbtn{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:4px 12px;font-size:.88rem;display:inline-flex;align-items:center;gap:6px;color:var(--ink);text-decoration:none;line-height:1.6}
+.tbtn:hover{border-color:var(--acc);color:var(--acc)}
+.tbtn[aria-pressed="true"]{background:var(--acc);border-color:var(--acc);color:#fff}
+.tbtn svg{width:16px;height:16px;flex:none}
+
+/* hub */
+.hero{padding-block:28px 8px}
+.eyebrow{font-family:var(--f-disp);color:var(--gold);font-weight:600;letter-spacing:.02em;font-size:.95rem;margin:0}
+.hero h1{font-family:var(--f-disp);font-weight:700;color:var(--ink);font-size:clamp(1.6rem,4.6vw,2.3rem);line-height:1.35;margin:.2em 0 .3em;text-wrap:balance}
+.hero p{margin:0;color:var(--muted);max-width:60ch}
+.portals{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;padding-block:20px}
+.portal{display:flex;flex-direction:column;gap:6px;text-align:start;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px;box-shadow:var(--shadow);text-decoration:none;color:inherit;position:relative;overflow:hidden}
+.portal::after{content:"";position:absolute;inset:auto 0 0 0;height:5px;background:var(--pc)}
+.portal:hover{border-color:var(--pc)}
+.portal .glyph{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;background:var(--pcs);color:var(--pc);font-family:var(--f-disp);font-weight:700;font-size:1.3rem}
+.portal h2{font-family:var(--f-disp);font-size:1.45rem;line-height:1.3;margin:4px 0 0;color:var(--ink)}.ptitles{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}.ptitles>div[dir=ltr]{text-align:left}.portal h2.pen{font-family:'Poppins','Segoe UI',system-ui,sans-serif;font-weight:700;font-size:1.45rem}.psub{color:var(--pc);font-weight:700;margin:0;font-size:1rem}
+.portal p{margin:0;color:var(--muted);font-size:.92rem;line-height:1.7}
+.portal .count{font-size:.85rem;color:var(--pc);font-weight:700}
+.p-a{--pc:#0f7a5c;--pcs:#e2f3ec}.p-b{--pc:#1f63a8;--pcs:#e3eefa}.p-s{--pc:#9a5b12;--pcs:#f8eddc}.p-ia{--pc:#6b4fb3;--pcs:#eeeafa}.p-ib{--pc:#0e7c86;--pcs:#e0f4f5}.ltrbody .card,.ltrbody .reading{direction:ltr;text-align:left}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .p-a{--pc:#4cc59a;--pcs:#173328}:root:not([data-theme="light"]) .p-b{--pc:#6aa8ec;--pcs:#16283f}:root:not([data-theme="light"]) .p-s{--pc:#e0a24e;--pcs:#33240f}:root:not([data-theme="light"]) .p-ia{--pc:#a993ec;--pcs:#251e3d}:root:not([data-theme="light"]) .p-ib{--pc:#4fc3cc;--pcs:#11303a}}
+:root[data-theme="dark"] .p-a{--pc:#4cc59a;--pcs:#173328}:root[data-theme="dark"] .p-b{--pc:#6aa8ec;--pcs:#16283f}:root[data-theme="dark"] .p-s{--pc:#e0a24e;--pcs:#33240f}:root[data-theme="dark"] .p-ia{--pc:#a993ec;--pcs:#251e3d}:root[data-theme="dark"] .p-ib{--pc:#4fc3cc;--pcs:#11303a}
+.howto{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;padding-block:6px 24px}
+.howto div{background:var(--sunk);border-radius:12px;padding:12px 14px;font-size:.92rem;line-height:1.7}
+.howto b{color:var(--ink);font-family:var(--f-disp);font-weight:600;display:block}
+
+/* grade shelf */
+.shelf-head{padding-block:22px 4px}
+.shelf-head h1{font-family:var(--f-disp);color:var(--ink);font-size:1.6rem;margin:0}
+.shelf-head p{margin:0;color:var(--muted)}
+.grades{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;padding-block:18px 30px}
+.grade{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px;text-align:start;display:flex;flex-direction:column;gap:2px;min-height:118px}
+.grade .g-num{font-family:var(--f-disp);font-size:1.7rem;font-weight:700;color:var(--acc);line-height:1.1}
+.grade .g-name{font-weight:700;color:var(--ink)}
+.grade .g-state{margin-top:auto;font-size:.82rem;color:var(--muted)}
+.grade.on{box-shadow:var(--shadow);border-color:color-mix(in srgb,var(--acc) 45%,var(--line))}
+.grade.on:hover{border-color:var(--acc)}
+.grade.on .g-state{color:var(--acc);font-weight:700}
+.grade.off{opacity:.62;cursor:default}
+.grade.off .g-num{color:var(--muted)}
+
+/* revision */
+.rev-top{padding-block:16px 6px;display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap}
+.rev-top h1{font-family:var(--f-disp);color:var(--ink);font-size:1.5rem;margin:0;flex:1;min-width:0}
+.meter{display:flex;align-items:center;gap:8px;font-size:.9rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.meter .bar{width:120px;height:8px;border-radius:9px;background:var(--sunk);overflow:hidden}
+.meter .bar i{display:block;height:100%;background:var(--acc);width:0;transition:width .3s}
+.secnav{display:flex;gap:6px;overflow-x:auto;padding-block:8px 10px;scrollbar-width:thin}
+.secnav button{flex:none;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:3px 12px;font-size:.88rem;white-space:nowrap}
+.secnav button[aria-current="true"]{background:var(--acc);color:#fff;border-color:var(--acc)}
+.secnav button.done::after{content:" ✓";color:var(--ok)}
+.secnav button[aria-current="true"].done::after{color:#fff}
+.sec-title{font-family:var(--f-disp);font-size:1.3rem;color:var(--acc);margin:14px 0 4px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.qhead{font-weight:700;color:var(--ink);margin:18px 0 6px;font-size:1.04rem;line-height:1.8}
+.subh{font-weight:700;color:var(--acc);margin:12px 0 4px}
+.qhead .en,.subh .en{display:block;font-weight:400}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;margin:10px 0;box-shadow:var(--shadow)}
+.card.ok{border-color:var(--ok);background:linear-gradient(var(--ok-soft),var(--ok-soft)) padding-box}
+.card.bad{border-color:var(--bad)}
+.qline{display:flex;gap:10px;align-items:flex-start}
+.qline .qn{flex:none;min-width:28px;height:28px;border-radius:8px;background:var(--acc-soft);color:var(--acc);font-weight:700;display:grid;place-items:center;font-size:.9rem;font-variant-numeric:tabular-nums;margin-top:4px}
+.qline .qt{flex:1;min-width:0;font-weight:600}
+.say{flex:none;border:none;background:transparent;color:var(--muted);padding:4px;border-radius:8px;line-height:0}
+.say:hover{color:var(--acc);background:var(--sunk)}
+.say svg{width:20px;height:20px}
+.blank{display:inline-block;min-width:4.5em;border-bottom:2px dashed var(--acc);color:var(--acc);text-align:center;padding:0 4px;font-weight:700}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.ratecard .en{display:block;font-size:.9em;color:var(--muted);font-weight:400}.ratecard .chip .en,.ratecard .btn .en{display:inline;color:inherit}.ratecard h3.rt{margin:0 0 8px;font-size:1.25rem;color:var(--acc)}.faces{display:flex;gap:5px;justify-content:center;flex-wrap:wrap;margin:6px 0 12px}
+.face{border:2px solid var(--line);background:var(--surface);border-radius:16px;padding:6px 4px;min-width:56px;flex:1 1 0;max-width:86px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer}
+.face span{font-size:2rem;line-height:1.1}.face small{font-size:.72rem;color:var(--muted)}.face[aria-pressed=true]{border-color:var(--acc);background:color-mix(in srgb,var(--acc) 12%,var(--surface));transform:scale(1.06)}
+.yn{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:8px 0}.yng{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:4px 14px;min-height:38px;cursor:pointer}.chip[aria-pressed=true]{border-color:var(--acc);background:var(--acc);color:#fff}
+.rin{width:100%;box-sizing:border-box;border:1.5px solid var(--line);border-radius:12px;padding:8px 12px;background:var(--surface);color:var(--ink);font:inherit;margin-top:8px}
+.nr{display:grid;grid-template-columns:2fr 1fr;gap:8px}.rmsg{margin-top:6px;color:#b42318;font-weight:700}.ratecard .btn{margin-top:12px}.btn.alt{background:#c98a00}
+.pdfbox{position:fixed;inset:auto 12px 16px 12px;z-index:90;background:var(--surface);border:2px solid var(--acc);border-radius:16px;padding:12px 14px;box-shadow:var(--shadow);display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;max-width:560px;margin:0 auto}.pdfbox p{margin:0;width:100%;text-align:center;font-weight:700}
+.vlink{display:flex;align-items:center;gap:14px;text-decoration:none;color:inherit}.vplay{flex:none;width:64px;height:46px;border-radius:12px;background:#e62117;color:#fff;display:grid;place-items:center;font-size:1.3rem}.vlink b{display:block;font-size:1.05rem}.vlink small{color:var(--muted)}.vcard{border-color:#e62117}
+.kgpic{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:10px 0}.kgpic img{max-height:170px;max-width:100%;border-radius:16px;background:#fff;padding:6px;box-shadow:0 3px 10px rgba(0,0,0,.08)}
+.bigopts{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}.bigopts .opt{font-size:2rem;min-width:84px;min-height:72px;text-align:center;border-radius:18px;font-weight:700;border-width:3px}
+body.kg .opt.right{animation:pop .5s}@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.18)}100%{transform:scale(1)}}
+.cf{position:fixed;z-index:99;font-size:26px;pointer-events:none;animation:cf 1.2s ease-out forwards}@keyframes cf{to{transform:translate(var(--dx),var(--dy)) rotate(200deg);opacity:0}}
+body.kg .card{border-radius:22px;border-width:2px}body.kg .qt{font-size:1.25rem}body.kg .pcard img{max-height:130px}
+@media (prefers-reduced-motion: reduce){.cf{display:none}body.kg .opt.right{animation:none}}
+.opt{border:1.5px solid var(--line);background:var(--surface);border-radius:12px;padding:6px 14px;text-align:start;line-height:1.7;min-height:44px}
+.opt:hover:not(:disabled){border-color:var(--acc);background:var(--acc-soft)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--ok);background:var(--ok-soft);color:var(--ok);font-weight:700}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft);color:var(--bad);text-decoration:line-through}
+.fb{margin-top:10px;border-radius:12px;padding:10px 12px;font-size:.95rem;line-height:1.8}
+.fb.good{background:var(--ok-soft);color:var(--ok);font-weight:700}
+.fb.help{background:var(--gold-soft);color:var(--text);border:1px solid color-mix(in srgb,var(--gold) 40%,transparent)}
+.fb.help b{color:var(--ink)}
+.fb .ref{display:block;margin-top:4px;color:var(--muted);font-size:.92rem}
+.fb .ref q{color:var(--text);font-weight:600}
+.inrow{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.inrow input,.inrow textarea{flex:1;min-width:0;border:1.5px solid var(--line);border-radius:12px;padding:6px 12px;background:var(--paper)}
+.inrow textarea{min-height:5.5em;width:100%;flex-basis:100%;line-height:1.9}
+.btn{border:none;border-radius:12px;padding:6px 16px;background:var(--acc);color:#fff;font-weight:700;min-height:42px}
+.btn.ghost{background:var(--sunk);color:var(--ink)}
+.btn.small{min-height:34px;padding:3px 12px;font-size:.9rem}
+.model{margin-top:10px;background:var(--sunk);border-radius:12px;padding:10px 12px}
+.model b{color:var(--acc)}
+.self{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.reading{background:var(--surface);border:1px solid var(--line);border-inline-start:5px solid var(--acc);border-radius:var(--r);padding:16px 18px;margin:10px 0;font-size:1.06rem;line-height:2.1}
+.reading p{margin:0 0 .6em}
+.reading .rhead{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px;color:var(--muted);font-size:.86rem}
+.reading .ric{float:inline-end;margin:0 12px 6px 0;width:64px}
+.poem{display:grid;grid-template-columns:1fr 1fr;gap:4px 24px;text-align:center;font-weight:600}
+@media (max-width:520px){.poem{grid-template-columns:1fr;gap:0}.poem span:nth-child(even){margin-bottom:10px;color:var(--acc)}}
+.tip{background:var(--gold-soft);border:1px dashed var(--gold);border-radius:12px;padding:10px 14px;margin:10px 0;font-size:.95rem}
+.tip b{color:var(--gold);font-family:var(--f-disp)}
+.note{margin:12px 0 4px;font-weight:700;color:var(--ink)}
+.tablewrap{overflow-x:auto;margin-top:8px}
+table.t{border-collapse:collapse;width:100%;min-width:520px;font-size:.95rem}
+table.t th,table.t td{border:1px solid var(--line);padding:6px 8px;text-align:center;vertical-align:middle}
+table.t th{background:var(--acc-soft);color:var(--ink)}
+.rv{color:transparent;background:var(--sunk);border-radius:6px;cursor:pointer;user-select:none}
+.rv.shown{color:var(--ok);background:transparent;font-weight:700;cursor:default}
+.crow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:6px 0;border-bottom:1px dashed var(--line)}
+.crow:last-child{border-bottom:none}
+.crow .w{font-weight:700;min-width:7em}
+.crow .opts{margin-top:0}
+.crow .opt{min-height:36px;padding:2px 10px;font-size:.92rem}
+.mrow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:6px 0;border-bottom:1px dashed var(--line)}
+.mrow .w{font-weight:700;flex:0 0 8em}
+.mrow select{flex:1;min-width:0;border:1.5px solid var(--line);border-radius:10px;padding:4px 8px;background:var(--paper)}
+.mrow.right select{border-color:var(--ok);background:var(--ok-soft)}
+.mrow.wrong select{border-color:var(--bad);background:var(--bad-soft)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{border:1.5px solid var(--line);background:var(--sunk);border-radius:10px;padding:2px 12px;font-weight:600}
+.chip[disabled]{opacity:.35}
+.built{min-height:48px;border:2px dashed var(--line);border-radius:12px;padding:6px 10px;margin-top:10px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.built .chip{background:var(--acc-soft);border-color:var(--acc)}
+.secfoot{display:flex;justify-content:space-between;gap:10px;margin:22px 0 40px;flex-wrap:wrap}
+.result{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px;text-align:center;margin:18px 0 40px;box-shadow:var(--shadow)}
+.result .big{font-family:var(--f-disp);font-size:2.4rem;color:var(--acc);font-variant-numeric:tabular-nums;line-height:1.2}
+.stars{font-size:1.8rem;letter-spacing:.15em;color:var(--gold)}
+.card{max-width:100%;overflow-x:auto}
+.gt{border-collapse:collapse;width:100%;font-size:.95rem;table-layout:auto}
+.gt td{overflow-wrap:anywhere}
+.gt td{border:1px solid var(--line);padding:6px 8px;text-align:center;vertical-align:middle}
+.gt p{margin:0}
+.gi{max-height:110px;width:auto;display:inline-block;margin:4px}
+.ans{color:transparent;background:var(--sunk);border-radius:6px;padding:0 6px;user-select:none}
+.revealed .ans{color:var(--ok);background:var(--ok-soft);font-weight:700}
+.dots{color:var(--muted)}
+.cardgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:10px}
+.pcard{border:1px solid var(--line);border-radius:12px;padding:8px;text-align:center;display:flex;flex-direction:column;gap:6px;align-items:center;background:var(--surface)}
+.pcard img{height:96px;width:auto;max-width:100%;object-fit:contain;background:#fff;border-radius:8px}
+.pcard select{width:100%;border:1.5px solid var(--line);border-radius:10px;padding:3px 6px;background:var(--paper)}
+.pcard.right{border-color:var(--ok);background:var(--ok-soft)}.pcard.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.pcard .fix{font-size:.85rem;color:var(--ok);font-weight:700}
+.pick{cursor:pointer}.pick[aria-pressed="true"]{border-color:var(--acc);box-shadow:0 0 0 3px var(--acc-soft)}
+.qimg{display:block;margin:8px auto;max-height:260px;width:auto;max-width:100%;background:#fff;border-radius:10px}
+.mrow img{height:56px;width:auto;background:#fff;border-radius:8px}
+.foot{border-top:1px solid var(--line);color:var(--muted);font-size:.84rem;padding-block:16px 26px;text-align:center}
+/* modal */
+.modal{position:fixed;inset:0;background:rgba(10,20,40,.55);display:grid;place-items:center;z-index:20;padding:16px}
+.sheet{background:var(--surface);border-radius:18px;max-width:420px;width:100%;padding:20px;text-align:center;max-height:calc(100% - 20px);overflow:auto}
+.sheet h2{font-family:var(--f-disp);color:var(--ink);margin:0 0 4px;font-size:1.25rem}
+.qrbox{position:relative;width:min(260px,100%);margin:14px auto;background:#fff;padding:12px;border-radius:14px;border:3px solid var(--navy)}
+.qrbox canvas,.qrbox img{width:100%!important;height:auto!important;display:block}
+.qrbox .qlogo{position:absolute;width:22%;left:39%;top:39%;background:#fff;border-radius:50%;padding:3px;border:2px solid var(--gold)}
+.urlbox{font-family:var(--f-en);direction:ltr;font-size:.78rem;background:var(--sunk);border-radius:8px;padding:6px 8px;word-break:break-all;user-select:all}
+.toast{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;padding:8px 16px;border-radius:999px;z-index:30;font-size:.92rem}
+@media (prefers-reduced-motion:no-preference){.card.ok{animation:pop .35s ease}@keyframes pop{50%{transform:scale(1.012)}}}
+@media (max-width:520px){.mast-logos{display:none}.meter .bar{width:80px}body{font-size:16.5px}}
+</style>
+
+</head><body><header class="masthead">
+  <div class="wrap">
+    <img class="crest" src="img/badge.png" alt="شعار مدرسة جيمس وستمنستر – رأس الخيمة">
+    <div class="mast-text">
+      <p class="mast-school">مدرسة جيمس وستمنستر – رأس الخيمة</p>
+      <p class="mast-dept">قسم المواد الوزارية <span class="en">MOE Subjects Department</span></p>
+    </div>
+    <div class="mast-logos"><img src="img/school.png" alt="GEMS Westminster School"><img src="img/gems.png" alt="GEMS Education"></div>
+  </div>
+</header>
+<nav class="subbar" aria-label="أدوات">
+  <div class="wrap">
+    <button class="tbtn" id="backBtn" hidden aria-label="رجوع"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>رجوع</button>
+    <div class="crumb" id="crumb">منصات المراجعة</div>
+    <button class="tbtn" id="soundBtn" aria-pressed="false" title="تشغيل الصوت أو إيقافه"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path id="wave" d="M16 9a4 4 0 010 6M18.5 6.5a8 8 0 010 11"/></svg><span id="soundLbl">الصوت متوقّف</span></button>
+    <button class="tbtn" id="shareBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3h-3zM20 14v7h-6"/></svg>رمز المشاركة</button>
+  </div>
+</nav>
+<main id="app"></main>
+<footer class="foot"><div class="wrap">قسم المواد الوزارية – مدرسة جيمس وستمنستر، رأس الخيمة • مراجعات الفصل الدراسي الأول 2026 – 2027</div></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="data.js"></script>
+<script>
+(function(){
+'use strict';
+// ---------- config ----------
+var SHARE_URL = 'https://claude.ai/artifact/7kupSFd25fW825fXEjS7Xm'; // public link for parents (used when not on the school's own host)
+var SUBJECTS = {
+  'arabic-a': {name:'اللُّغَةُ العَرَبِيَّةُ', sub:'لِلنّاطِقينَ بِها', en:'Arabic Language', ensub:'Native Speakers', cls:'p-a', glyph:'ع', desc:'القِراءَةُ وَالنُّصوصُ وَالنَّحْوُ وَالإِمْلاءُ وَالبَلاغَةُ وَالتَّعْبيرُ.'},
+  'arabic-b': {name:'اللُّغَةُ العَرَبِيَّةُ', sub:'لِغَيْرِ النّاطِقينَ بِها', en:'Arabic Language', ensub:'Non-Native Speakers', cls:'p-b', glyph:'أ', desc:'فَهْمُ المَقْروءِ وَالمُفْرَداتُ وَالتَّراكيبُ وَالإِمْلاءُ، مَعَ تَرْجَمَةٍ إِنْجِليزِيَّةٍ لِلتَّعْليماتِ.'},
+  'islamic-a':{name:'التَّرْبِيَةُ الإِسْلامِيَّةُ', sub:'لِلنّاطِقينَ بِالعَرَبِيَّةِ', en:'Islamic Education', ensub:'Arabic Speakers', cls:'p-ia', glyph:'ت', desc:'القُرْآنُ الكَريمُ وَالحَديثُ الشَّريفُ وَالعَقيدَةُ وَالعِباداتُ وَالسّيرَةُ وَالقِيَمُ.'},
+  'islamic-b':{name:'التَّرْبِيَةُ الإِسْلامِيَّةُ', sub:'لِغَيْرِ النّاطِقينَ بِالعَرَبِيَّةِ', en:'Islamic Education', ensub:'Non-Arabic Speakers', cls:'p-ib', glyph:'س', desc:'مُراجَعاتٌ بِاللُّغَةِ الإِنْجِليزِيَّةِ: القُرْآنُ وَالحَديثُ وَالعَقيدَةُ وَالآدابُ وَالسّيرَةُ.'},
+  'social':   {name:'الدِّراساتُ الاجْتِماعِيَّةُ', sub:'وَالتَّرْبِيَةُ الوَطَنِيَّةُ', en:'Social Studies', ensub:'& National Education', cls:'p-s', glyph:'د', desc:'الخَرائِطُ وَالمَفاهيمُ وَالحَضاراتُ وَالهُوِيَّةُ الوَطَنِيَّةُ، بِأَسْئِلَةٍ مُصَوَّرَةٍ لِلصُّفوفِ الأولى.'}
+};
+var GRADES = [['KG1','الرَّوْضَةُ الأولى','KG1'],['KG2','الرَّوْضَةُ الثّانِيَةُ','KG2'],['G1','الصَّفُّ الأَوَّلُ','1'],['G2','الصَّفُّ الثّاني','2'],['G3','الصَّفُّ الثّالِثُ','3'],['G4','الصَّفُّ الرّابِعُ','4'],['G5','الصَّفُّ الخامِسُ','5'],['G6','الصَّفُّ السّادِسُ','6'],['G7','الصَّفُّ السّابِعُ','7'],['G8','الصَّفُّ الثّامِنُ','8'],['G9','الصَّفُّ التّاسِعُ','9'],['G10','الصَّفُّ العاشِرُ','10'],['G11','الصَّفُّ الحادي عَشَرَ','11'],['G12','الصَّفُّ الثّاني عَشَرَ','12']];
+var REV = window.REV || {};
+var app = document.getElementById('app');
+
+// ---------- storage ----------
+function load(k, d){ try{ var v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } }
+function save(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+
+// ---------- text helpers ----------
+var HARAKAT = /[ً-ْٰـ]/g;
+function norm(s){ return String(s||'').replace(HARAKAT,'').replace(/[أإآٱ]/g,'ا').replace(/ى/g,'ي').replace(/ة/g,'ه').replace(/ؤ/g,'و').replace(/[^ء-يa-zA-Z0-9]/g,'').toLowerCase(); }
+function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+function blanks(q){ return esc(q).replace(/⟦[^⟧]*⟧/g,'<span class="blank">؟</span>'); }
+function plain(q){ return String(q||'').replace(/⟦[^⟧]*⟧/g,' فَراغ ').replace(/\s+/g,' '); }
+function shuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;} return a; }
+function el(tag, cls, html){ var e=document.createElement(tag); if(cls) e.className=cls; if(html!=null) e.innerHTML=html; return e; }
+
+// ---------- sound ----------
+var sound = load('rev-sound', false);
+var actx = null, voices = [];
+function pickVoices(){ try{ voices = speechSynthesis.getVoices() || []; }catch(e){ voices=[]; } }
+if ('speechSynthesis' in window){ pickVoices(); speechSynthesis.onvoiceschanged = pickVoices; }
+function voiceFor(lang){ for (var i=0;i<voices.length;i++){ if ((voices[i].lang||'').toLowerCase().indexOf(lang)===0) return voices[i]; } return null; }
+var CURLANG='ar';
+function speak(text, lang){
+  lang = lang || CURLANG;
+  if (!('speechSynthesis' in window)) { toast('القراءة الصوتية غير متاحة على هذا الجهاز'); return; }
+  try{
+    speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(String(text).replace(/⟦[^⟧]*⟧/g,'…'));
+    u.lang = lang==='en' ? 'en-GB' : 'ar-SA'; var v = voiceFor(lang==='en'?'en':'ar'); if (v) u.voice = v;
+    u.rate = lang==='en' ? 0.95 : 0.85;
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+function tone(good){
+  if (!sound) return;
+  try{
+    actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+    var notes = good ? [660, 880, 1320] : [300, 220];
+    notes.forEach(function(f,i){
+      var o=actx.createOscillator(), g=actx.createGain(); o.type= good?'sine':'triangle'; o.frequency.value=f;
+      var t=actx.currentTime + i*0.11; g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(0.18,t+0.02); g.gain.exponentialRampToValueAtTime(0.0001,t+0.22);
+      o.connect(g); g.connect(actx.destination); o.start(t); o.stop(t+0.25);
+    });
+  }catch(e){}
+}
+function setSound(on){
+  sound = on; save('rev-sound', on);
+  var b=document.getElementById('soundBtn'); b.setAttribute('aria-pressed', on?'true':'false');
+  document.getElementById('soundLbl').textContent = on ? 'الصوت يعمل' : 'الصوت متوقّف';
+  document.getElementById('wave').style.display = on ? '' : 'none';
+  if (!on && 'speechSynthesis' in window) try{ speechSynthesis.cancel(); }catch(e){}
+}
+document.getElementById('soundBtn').onclick = function(){ setSound(!sound); if (sound){ tone(true); } };
+setSound(sound);
+var SAY_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 9a4 4 0 010 6"/></svg>';
+function sayBtn(text, lang){ var b = el('button','say',SAY_SVG); b.title='استمع'; b.setAttribute('aria-label','استمع'); b.onclick=function(){ speak(text, lang); }; return b; }
+
+// ---------- feedback ----------
+var PRAISE = ['أَحْسَنْتَ! إِجابَةٌ صَحيحَةٌ','مُمْتازٌ! اسْتَمِرَّ','رائِعٌ! أَنْتَ عَلى الطَّريقِ الصَّحيحِ','بارَكَ اللهُ فيكَ! إِجابَةٌ مُوَفَّقَةٌ','عَمَلٌ مُتْقَنٌ! أَحْسَنْتَ','إِجابَةٌ ذَكِيَّةٌ! واصِلْ'];
+var PRAISE_EN = ['Well done!','Excellent!','Great job!','Brilliant!','Super!','Keep it up!'];
+function praise(card, isB){
+  var i = Math.floor(Math.random()*PRAISE.length);
+  var f = el('div','fb good', esc(PRAISE[i]) + (isB ? ' <span class="en">'+PRAISE_EN[i]+'</span>' : ''));
+  card.appendChild(f); card.classList.add('ok'); tone(true);
+  if (sound) speak(PRAISE[i]);
+  if (document.body.classList.contains('kg')) confetti(card);
+}
+function confetti(card){ var sy=['⭐','🎉','🌟','🎈','💛','✨']; var r=card.getBoundingClientRect();
+  for (var k=0;k<14;k++){ var s=el('span','cf',sy[k%sy.length]); s.style.left=(r.left+r.width/2)+'px'; s.style.top=(r.top+r.height/2)+'px';
+    s.style.setProperty('--dx',(Math.random()*260-130)+'px'); s.style.setProperty('--dy',(-80-Math.random()*160)+'px'); document.body.appendChild(s); setTimeout(function(x){return function(){x.remove();}}(s),1300); } }
+function explain(card, html, said){
+  var f = el('div','fb help', html); card.appendChild(f); card.classList.add('bad'); tone(false);
+  if (sound && said) speak(said);
+}
+// find the passage sentence that best supports an answer
+function evidence(ctx, needle){
+  if (!ctx.passage || !needle) return '';
+  var n = norm(needle); if (n.length < 3) return '';
+  var sents = ctx.passage.join(' ').replace(/([.؟!؛:])\s+/g,'$1\n').split('\n');
+  var best='', bestScore=0;
+  var words = String(needle).split(/\s+/).map(norm).filter(function(w){return w.length>2;});
+  sents.forEach(function(s){
+    var ns = norm(s), sc = 0;
+    if (ns.indexOf(n) >= 0) sc = 100;
+    words.forEach(function(w){ if (ns.indexOf(w) >= 0) sc += 1; });
+    if (sc > bestScore){ bestScore = sc; best = s; }
+  });
+  if (bestScore >= 100 || (words.length && bestScore >= Math.max(2, Math.ceil(words.length*0.6)))) return best.trim();
+  return '';
+}
+function helpHtml(correct, ctx, extra){
+  var h = '<b>الإجابة الصحيحة:</b> ' + esc(correct);
+  if (extra) h += '<span class="ref">' + extra + '</span>';
+  var ev = evidence(ctx, correct);
+  if (ev) h += '<span class="ref">ارجِعْ إِلى النَّصِّ: <q>' + esc(ev.length > 220 ? ev.slice(0,220)+'…' : ev) + '</q></span>';
+  else if (ctx.tip) h += '<span class="ref">تَذَكَّرْ: ' + esc(ctx.tip.length > 260 ? ctx.tip.slice(0,260)+'…' : ctx.tip) + '</span>';
+  return h;
+}
+
+// ---------- scoring state ----------
+var cur = null; // {id, rev, sections, state}
+function mark(key, val){ cur.state.ans[key] = val; save('rev-'+cur.id, cur.state); updateMeter(); }
+function updateMeter(){
+  var tot = cur.total, a = cur.state.ans, done = 0, ok = 0;
+  Object.keys(a).forEach(function(k){ done++; if (a[k] === 1) ok++; });
+  var m = document.getElementById('meterTxt'); if (m) m.textContent = ok + ' / ' + tot;
+  var b = document.getElementById('meterBar'); if (b) b.style.width = Math.round(100*Math.min(done,tot)/Math.max(tot,1)) + '%';
+}
+
+// ---------- item renderers ----------
+function head(card, n, q, sayText, en, isB){
+  var line = el('div','qline');
+  if (n != null && n !== '') line.appendChild(el('span','qn', esc(n)));
+  var qt = el('div','qt', q + (en ? '<span class="en" style="display:block">'+esc(en)+'</span>' : ''));
+  line.appendChild(qt); line.appendChild(sayBtn(sayText));
+  card.appendChild(line);
+}
+function choiceItem(card, key, choices, correctIdx, ctx, isB, extraWhy){
+  var box = el('div','opts');
+  var prev = cur.state.ans[key];
+  choices.forEach(function(c, i){
+    var b = el('button','opt', esc(c)); b.type='button';
+    b.onclick = function(){
+      var all = box.querySelectorAll('.opt'); all.forEach(function(x){ x.disabled = true; });
+      if (i === correctIdx){ b.classList.add('right'); mark(key,1); praise(card, isB); }
+      else { b.classList.add('wrong'); all[correctIdx].classList.add('right'); mark(key,0);
+        explain(card, helpHtml(choices[correctIdx], ctx, extraWhy), 'الإجابة الصحيحة: ' + choices[correctIdx]); }
+    };
+    box.appendChild(b);
+  });
+  card.appendChild(box);
+  if (prev != null){ // restore
+    var all = box.querySelectorAll('.opt'); all.forEach(function(x){ x.disabled = true; }); all[correctIdx].classList.add('right');
+    card.classList.add(prev===1?'ok':'bad');
+  }
+}
+function typedItem(card, key, answers, ctx, isB){
+  var row = el('div','inrow'); var inp = el('input'); inp.type='text'; inp.id='in-'+key; inp.placeholder='اكتب إجابتك هنا'; inp.setAttribute('aria-label','الإجابة');
+  var go = el('button','btn','تحقَّقْ'); go.type='button';
+  row.appendChild(inp); row.appendChild(go); card.appendChild(row);
+  function check(){
+    if (card.querySelector('.fb')) return;
+    var v = norm(inp.value); if (!v){ inp.focus(); return; }
+    var alts = []; answers.forEach(function(a){ String(a).split(/\s*[\/،]\s*|\s+–\s+|\s+أَوْ\s+/).forEach(function(x){ if (norm(x)) alts.push(norm(x)); }); });
+    var full = norm(answers.join(''));
+    inp.disabled = true; go.disabled = true;
+    if (v === full || alts.indexOf(v) >= 0){ mark(key,1); praise(card, isB); }
+    else { mark(key,0); explain(card, helpHtml(answers.join(' – '), ctx), 'الإجابة الصحيحة: ' + answers.join(' ، ')); }
+  }
+  go.onclick = check; inp.onkeydown = function(e){ if (e.key==='Enter') check(); };
+  if (cur.state.ans[key] != null){ inp.disabled = true; go.disabled = true; inp.value = '—'; card.classList.add(cur.state.ans[key]===1?'ok':'bad');
+    card.appendChild(el('div','model','<b>الإجابة:</b> '+esc(answers.join(' – ')))); }
+}
+function openItem(card, key, answer, ctx, isB, short){
+  var row = el('div','inrow');
+  var inp = short ? el('input') : el('textarea'); if (short) inp.type='text';
+  inp.id='in-'+key; inp.placeholder = short ? 'اكتب إجابتك' : 'اكتب إجابتك بأسلوبك، ثم قارنها بالنموذج'; inp.setAttribute('aria-label','الإجابة');
+  var go = el('button','btn', short ? 'تحقَّقْ' : 'قارِنْ بِالنَّموذَجِ'); go.type='button';
+  row.appendChild(inp); row.appendChild(go); card.appendChild(row);
+  var saved = load('txt-'+cur.id+'-'+key, ''); if (saved) inp.value = saved;
+  inp.oninput = function(){ save('txt-'+cur.id+'-'+key, inp.value); };
+  function reveal(auto){
+    if (card.querySelector('.model')) return;
+    go.disabled = true;
+    var alts = String(answer).split(/\s*[\/،]\s*|\s+–\s+/).map(norm).filter(Boolean);
+    var v = norm(inp.value);
+    if (short && v && (alts.indexOf(v) >= 0 || v === norm(answer))){ mark(key,1); praise(card,isB); card.appendChild(el('div','model','<b>الإجابة النموذجية:</b> '+esc(answer))); return; }
+    card.appendChild(el('div','model','<b>الإجابة النموذجية:</b> '+esc(answer || 'تُقبَل إجابة الطالب الصحيحة بأسلوبه.')));
+    if (sound && answer) speak(answer);
+    if (cur.state.ans[key] != null) { card.classList.add(cur.state.ans[key]===1?'ok':'bad'); return; }
+    var s = el('div','self'); s.innerHTML = '<span style="align-self:center;color:var(--muted);font-size:.9rem">قارِنْ إِجابَتَكَ:</span>';
+    var y = el('button','btn small','إِجابَتي صَحيحَةٌ'), n = el('button','btn ghost small','أَحْتاجُ إِلى مُراجَعَةٍ');
+    y.onclick = function(){ s.remove(); mark(key,1); praise(card,isB); };
+    n.onclick = function(){ s.remove(); mark(key,0); explain(card,'لا بَأْسَ! اقْرَأِ الإِجابَةَ النَّموذَجِيَّةَ بِتَمَعُّنٍ، ثُمَّ اكْتُبْها بِأُسْلوبِكَ مَرَّةً أُخْرى.' + (evidence(ctx, answer) ? '<span class="ref">ارجِعْ إِلى النَّصِّ: <q>'+esc(evidence(ctx, answer))+'</q></span>' : ''), 'لا بأس، راجع الإجابة النموذجية'); };
+    s.appendChild(y); s.appendChild(n); card.appendChild(s);
+  }
+  go.onclick = function(){ reveal(); };
+  if (short) inp.onkeydown = function(e){ if (e.key==='Enter') reveal(); };
+  if (cur.state.ans[key] != null) reveal(true);
+}
+
+function render(item, idx, ctx, out, isB){
+  var key = 'i'+idx;
+  var t = item.t, card;
+  switch(t){
+    case 'heading': ctx.group = idx; ctx.choices = null;
+      var h = el('div','qhead', esc(item.text) + (item.en ? '<span class="en">'+esc(item.en)+'</span>' : '')); out.appendChild(h); return;
+    case 'sub': out.appendChild(el('div','subh', esc(item.text) + (item.en ? '<span class="en">'+esc(item.en)+'</span>' : ''))); return;
+    case 'note': out.appendChild(el('div','note', esc(item.text) + (item.en ? '<span class="en" style="display:block;font-weight:400">'+esc(item.en)+'</span>' : ''))); return;
+    case 'tip': ctx.tip = item.text; out.appendChild(el('div','tip','<b>تَذَكَّرْ: </b>'+esc(item.text))); return;
+    case 'bank': return;
+    case 'passage':
+      ctx.passage = item.paras;
+      card = el('div','reading');
+      var rh = el('div','rhead','<span>اقرأ النص بتمعّن</span>'); rh.appendChild(sayBtn(item.paras.join(' '))); card.appendChild(rh);
+      (item.icons||[]).slice(0,1).forEach(function(ic){ var im = el('img','ric'); im.src='img/'+ic+'.png'; im.alt=''; card.appendChild(im); });
+      item.paras.forEach(function(p){ card.appendChild(el('p',null,esc(p))); });
+      out.appendChild(card); return;
+    case 'poem':
+      ctx.passage = item.lines.map(function(l){ return l.join(' '); });
+      card = el('div','reading');
+      var ph = el('div','rhead','<span>اقرأ الأبيات</span>'); ph.appendChild(sayBtn(ctx.passage.join(' ، '))); card.appendChild(ph);
+      var g = el('div','poem'); item.lines.forEach(function(l){ g.appendChild(el('span',null,esc(l[0]))); g.appendChild(el('span',null,esc(l[1]))); }); card.appendChild(g);
+      out.appendChild(card); return;
+    case 'video': {
+      card = el('div','card vcard'); var va = document.createElement('a'); va.href = item.url; va.target = '_blank'; va.rel = 'noopener'; va.className = 'vlink';
+      va.innerHTML = '<span class="vplay" aria-hidden="true">▶</span><span><b>'+esc(item.cap || 'شاهد الفيديو')+'</b><small>YouTube</small></span>';
+      card.appendChild(va); out.appendChild(card); return; }
+    case 'mcq':
+      card = el('div','card'); head(card, item.n, esc(item.q), item.q, item.en, isB);
+      if (item.img){ var kp = el('div','kgpic'); (Array.isArray(item.img)?item.img:[item.img]).forEach(function(u){ var im=document.createElement('img'); im.src=u; im.alt=''; kp.appendChild(im); }); card.appendChild(kp); }
+      choiceItem(card, key, item.opts, item.c, ctx, isB, item.why ? esc(item.why) : ''); if (item.big) card.querySelector('.opts').classList.add('bigopts'); out.appendChild(card); return true;
+    case 'tf':
+      card = el('div','card'); head(card, item.n, esc(item.q), item.q, null, isB);
+      var ch = isB ? ['✓ صَحيحٌ  True','✗ خَطَأٌ  False'] : ['✓ صَحيحٌ','✗ خَطَأٌ'];
+      choiceItem(card, key, ch, item.c === false ? 1 : 0, ctx, isB, item.why ? 'التَّصْويبُ: ' + esc(item.why) : (item.c===false ? 'العِبارَةُ لا تُوافِقُ ما في النَّصِّ أَوِ الدَّرْسِ.' : ''));
+      out.appendChild(card); return true;
+    case 'fill': {
+      card = el('div','card');
+      var q = item.q, choices = null;
+      var m = q.match(/\(([^()⟦⟧]+–[^()⟦⟧]+)\)\s*$/);
+      if (item.ans.length === 1 && m){ var cs = m[1].split('–').map(function(s){return s.trim();}).filter(Boolean); if (cs.some(function(c){ return norm(c)===norm(item.ans[0]); })){ choices = cs; q = q.slice(0, m.index); } }
+      if (!choices && item.ans.length === 1 && item.bank) choices = item.bank.slice();
+      if (!choices && item.ans.length === 1 && ctx.groupChoices && ctx.groupChoices.length > 1 && ctx.groupChoices.length <= 5) choices = ctx.groupChoices.slice();
+      head(card, item.n, blanks(q), plain(q), null, isB);
+      if (choices){ var ci = -1; choices.forEach(function(c,i){ if (norm(c)===norm(item.ans[0])) ci = i; }); if (ci < 0){ choices.push(item.ans[0]); ci = choices.length-1; }
+        choiceItem(card, key, choices, ci, ctx, isB); }
+      else typedItem(card, key, item.ans, ctx, isB);
+      out.appendChild(card); return true; }
+    case 'open':
+      card = el('div','card'); head(card, item.n, esc(item.q), item.q, null, isB);
+      openItem(card, key, item.a, ctx, isB, !!item.short || (item.a && item.a.length < 26));
+      out.appendChild(card); return true;
+    case 'write':
+      card = el('div','card'); card.appendChild(el('div','qt','<b>اُكْتُبْ هُنا</b> <span style="color:var(--muted);font-weight:400">(لِلتَّدْريبِ؛ لا تُحْتَسَبُ في النَّتيجَةِ)</span>'));
+      var r = el('div','inrow'); var ta = el('textarea'); ta.id='w-'+key; ta.style.minHeight='9em'; ta.placeholder='اكتب موضوعك هنا…'; ta.setAttribute('aria-label','موضوع التعبير');
+      ta.value = load('txt-'+cur.id+'-'+key,''); ta.oninput = function(){ save('txt-'+cur.id+'-'+key, ta.value); var w = ta.value.trim().split(/\s+/).filter(Boolean).length; wc.textContent = w + ' كَلِمَةً'; };
+      var wc = el('span',null,''); wc.style.cssText='color:var(--muted);font-size:.88rem;align-self:center';
+      var mb = el('button','btn ghost small','اعْرِضِ النَّموذَجَ وَمَعاييرَ التَّصْحيحِ');
+      mb.onclick = function(){ if (card.querySelector('.model')) return; card.appendChild(el('div','model', (item.criteria ? '<b>'+esc(item.criteria)+'</b><br>' : '') + (item.model ? '<b>نَموذَجٌ إِرْشادِيٌّ:</b> '+esc(item.model.replace(/^نَموذَجٌ إِرْشادِيٌّ[^:]*:\s*/,'')) : ''))); };
+      r.appendChild(ta); r.appendChild(wc); r.appendChild(mb); card.appendChild(r); out.appendChild(card); ta.oninput(); return;
+    case 'table': {
+      card = el('div','card'); card.appendChild(el('div','qt','اضْغَطْ عَلى أَيِّ خانَةٍ لِتَظْهَرَ إِجابَتُها بَعْدَ أَنْ تُفَكِّرَ فيها.'));
+      var w = el('div','tablewrap'); var tb = el('table','t'); var tr = el('tr'); item.heads.forEach(function(h){ tr.appendChild(el('th',null,esc(h))); }); tb.appendChild(tr);
+      var rows = Math.max.apply(null, item.cols.map(function(c){return c.length;}));
+      for (var r2=0;r2<rows;r2++){ var row = el('tr'); item.cols.forEach(function(c,ci){ var v = c[r2]||''; var td;
+        if ((item.given||[]).indexOf(ci) >= 0) td = el('td',null,'<b>'+esc(v)+'</b>'); else { td = el('td','rv',esc(v)); td.tabIndex=0; td.onclick = td.onkeydown = function(){ this.classList.add('shown'); }; }
+        row.appendChild(td); }); tb.appendChild(row); }
+      w.appendChild(tb); card.appendChild(w); out.appendChild(card); return; }
+    case 'classify': {
+      if (!item.cols.length){ out.appendChild(el('div','note','صَنِّفِ الكَلِماتِ في دَفْتَرِكَ حَسَبَ: ' + esc(item.heads.join(' – ')))); return; }
+      var single = item.cols.every(function(c){ return c.length <= 1; });
+      if (single){ item.heads.forEach(function(h,i){ var c2 = el('div','card'); head(c2, i+1, esc(h), h, null, isB); openItem(c2, key+'_'+i, (item.cols[i]||[''])[0], ctx, isB, true); out.appendChild(c2); }); return item.heads.length; }
+      card = el('div','card'); card.appendChild(el('div','qt','اِخْتَرِ المَجْموعَةَ المُناسِبَةَ لِكُلِّ كَلِمَةٍ:' + (isB ? '<span class="en" style="display:block">Choose the right group for each word.</span>' : '')));
+      var words = []; item.cols.forEach(function(c,ci){ c.forEach(function(wd){ words.push([wd,ci]); }); });
+      shuffle(words).forEach(function(wd, wi){
+        var row = el('div','crow'); row.appendChild(el('span','w',esc(wd[0])));
+        var sub = el('div'); row.appendChild(sub); card.appendChild(row);
+        var mini = {}; // reuse choiceItem on a sub-card
+        choiceItem(row, key+'_'+norm(wd[0]), item.heads, wd[1], ctx, isB);
+      });
+      out.appendChild(card); return words.length; }
+    case 'match': {
+      card = el('div','card'); card.appendChild(el('div','qt',(item.q ? esc(item.q) : 'اِخْتَرْ لِكُلِّ كَلِمَةٍ ما يُناسِبُها:') + (isB ? '<span class="en" style="display:block">'+(item.en ? esc(item.en) : 'Match each word with its meaning.')+'</span>' : ''))); if (item.q) card.firstChild.appendChild(sayBtn(item.q));
+      var right = shuffle(item.pairs.map(function(p){ return p[1]; }));
+      item.pairs.forEach(function(p, pi){
+        var row = el('div','mrow'); row.appendChild(p[2] ? (function(){ var im3 = el('img'); im3.src = p[2]; im3.alt=''; return im3; })() : el('span','w',esc(p[0])));
+        var s = el('select'); s.id = 'm-'+key+'-'+pi; s.setAttribute('aria-label', p[0]);
+        s.appendChild(el('option',null,'— اخْتَرْ —')); right.forEach(function(r){ var o = el('option',null,esc(r)); o.value = r; s.appendChild(o); });
+        var k2 = key+'_'+pi;
+        if (cur.state.ans[k2] != null){ s.value = p[1]; s.disabled = true; row.classList.add(cur.state.ans[k2]===1?'right':'wrong'); }
+        s.onchange = function(){ s.disabled = true; if (s.value === p[1]){ row.classList.add('right'); mark(k2,1); tone(true); if (sound) speak('أحسنت'); }
+          else { row.classList.add('wrong'); mark(k2,0); tone(false); var f = el('div','fb help','<b>الصَّوابُ:</b> '+esc(p[0])+' ← '+esc(p[1])); row.appendChild(f); } };
+        row.appendChild(s); card.appendChild(row);
+      });
+      out.appendChild(card); return item.pairs.length; }
+    case 'arrange': {
+      card = el('div','card'); head(card, item.n, item.q ? esc(item.q) : 'رَتِّبِ الكَلِماتِ لِتُكَوِّنَ جُمْلَةً مُفيدَةً:', item.q || 'رتب الكلمات لتكون جملة مفيدة', (isB && !item.q) ? 'Put the words in order.' : null, isB);
+      var built = el('div','built'); var pool = el('div','chips'); var picked = [];
+      var ws = shuffle(item.words); if (ws.join() === item.words.join()) ws = item.words.slice().reverse();
+      ws.forEach(function(wd){ var c = el('button','chip',esc(wd)); c.type='button'; c.onclick = function(){ if (c.disabled) return; c.disabled = true; picked.push(wd); var b = el('span','chip',esc(wd)); built.appendChild(b); }; pool.appendChild(c); });
+      var row = el('div','inrow'); var go = el('button','btn','تحقَّقْ'), rs = el('button','btn ghost','ابْدَأْ مِنْ جَديدٍ');
+      rs.onclick = function(){ picked = []; built.innerHTML=''; pool.querySelectorAll('.chip').forEach(function(c){ c.disabled=false; }); };
+      go.onclick = function(){ if (card.querySelector('.fb') || !picked.length) return;
+        go.disabled = rs.disabled = true; pool.querySelectorAll('.chip').forEach(function(c){ c.disabled=true; });
+        if (norm(picked.join(' ')) === norm(item.ans)){ mark(key,1); praise(card,isB); }
+        else { mark(key,0); explain(card, '<b>التَّرْتيبُ الصَّحيحُ:</b> '+esc(item.ans)+'<span class="ref">ابْدَأْ بِالفِعْلِ أَوِ المُبْتَدَأِ، ثُمَّ أَكْمِلِ المَعْنى.</span>', 'الترتيب الصحيح: '+item.ans); } };
+      card.appendChild(pool); card.appendChild(built); row.appendChild(go); row.appendChild(rs); card.appendChild(row);
+      if (cur.state.ans[key] != null){ go.disabled = rs.disabled = true; built.innerHTML = '<span class="chip">'+esc(item.ans)+'</span>'; card.classList.add(cur.state.ans[key]===1?'ok':'bad'); }
+      out.appendChild(card); return true; }
+    case 'image': { var im = el('img','qimg'); im.src = item.src; im.alt = ''; im.loading = 'lazy'; out.appendChild(im); return; }
+    case 'html': {
+      card = el('div','card'); var hb = el('div', null, item.html); hb.querySelectorAll('img').forEach(function(i){ i.loading='lazy'; }); card.appendChild(hb);
+      if (item.reveal){ var rb2 = el('button','btn ghost small','اعْرِضِ الإِجابَةَ'); rb2.style.marginTop='8px'; rb2.onclick = function(){ card.classList.add('revealed'); rb2.remove(); if (sound) tone(true); }; card.appendChild(rb2); }
+      out.appendChild(card); return; }
+    case 'cards': {
+      card = el('div','card'); card.appendChild(el('div','qt','اِخْتَرِ الاسْمَ المُناسِبَ لِكُلِّ صورَةٍ:' + (isB ? '<span class="en" style="display:block">Choose the right word for each picture.</span>' : '')));
+      var grid = el('div','cardgrid'); var names = item.cards.map(function(c){ return c.ans; });
+      item.cards.forEach(function(c, ci){
+        var pc = el('div','pcard'); if (c.img){ var im2 = el('img'); im2.src = c.img; im2.alt=''; im2.loading='lazy'; pc.appendChild(im2); }
+        var k3 = key+'_'+ci; var sel = el('select'); sel.id = 'c-'+k3; sel.setAttribute('aria-label','اختر الاسم');
+        sel.appendChild(el('option',null,'— اخْتَرْ —')); shuffle(names).forEach(function(nm){ var o = el('option',null,esc(nm)); o.value = nm; sel.appendChild(o); });
+        if (cur.state.ans[k3] != null){ sel.value = c.ans; sel.disabled = true; pc.classList.add(cur.state.ans[k3]===1?'right':'wrong'); }
+        sel.onchange = function(){ sel.disabled = true; if (sel.value === c.ans){ pc.classList.add('right'); mark(k3,1); tone(true); if (sound) speak(c.ans); }
+          else { pc.classList.add('wrong'); mark(k3,0); tone(false); pc.appendChild(el('span','fix','✓ '+esc(c.ans))); } };
+        pc.appendChild(sel); grid.appendChild(pc); });
+      card.appendChild(grid); out.appendChild(card); return; }
+    case 'picchoice': {
+      card = el('div','card'); card.appendChild(el('div','qt',item.q ? esc(item.q) : 'اضْغَطْ عَلى الصّورَةِ (أَوِ الصُّوَرِ) الصَّحيحَةِ، ثُمَّ «تَحَقَّقْ»:'));
+      var g2 = el('div','cardgrid'); var chosen = {};
+      item.items.forEach(function(it2, ii){ var pc = el('button','pcard pick'); pc.type='button'; pc.setAttribute('aria-pressed','false');
+        pc.innerHTML = (it2.img ? '<img src="'+it2.img+'" alt="">' : '') + '<b>'+esc(it2.cap)+'</b>';
+        pc.onclick = function(){ if (pc.disabled) return; chosen[ii] = !chosen[ii]; pc.setAttribute('aria-pressed', chosen[ii]?'true':'false'); }; g2.appendChild(pc); });
+      card.appendChild(g2); var go2 = el('button','btn','تحقَّقْ'); go2.style.marginTop='10px';
+      go2.onclick = function(){ var btns = g2.querySelectorAll('.pcard'); var ok = true;
+        btns.forEach(function(b, ii){ b.disabled = true; var want = item.c.indexOf(ii) >= 0; if (!!chosen[ii] !== want) ok = false; if (want) b.classList.add('right'); else if (chosen[ii]) b.classList.add('wrong'); });
+        go2.remove(); if (ok){ mark(key,1); praise(card,isB); } else { mark(key,0); explain(card,'<b>الصُّوَرُ الصَّحيحَةُ</b> هِيَ المُحاطَةُ بِاللَّوْنِ الأَخْضَرِ.','راجع الصور الصحيحة'); } };
+      card.appendChild(go2); if (cur.state.ans[key] != null){ go2.remove(); card.classList.add(cur.state.ans[key]===1?'ok':'bad'); g2.querySelectorAll('.pcard').forEach(function(b,ii){ b.disabled=true; if (item.c.indexOf(ii)>=0) b.classList.add('right'); }); }
+      out.appendChild(card); return true; }
+    default:
+      if (item.text) out.appendChild(el('div','note',esc(item.text)));
+  }
+}
+// precompute group choice sets for fills without own options
+function prep(items){
+  var groupStart = 0, groups = {};
+  items.forEach(function(it, i){
+    if (it.t === 'heading' || it.t === 'sub' || it.t === 'note' || it.t === 'section') groupStart = i;
+    if (it.t === 'fill' && it.ans.length === 1 && !/\([^()]+–[^()]+\)\s*$/.test(it.q) && !it.bank){ (groups[groupStart] = groups[groupStart] || []).push(i); }
+  });
+  var map = {};
+  Object.keys(groups).forEach(function(g){
+    var idxs = groups[g]; if (idxs.length < 2) return;
+    var uniq = []; idxs.forEach(function(i){ var a = items[i].ans[0]; if (!uniq.some(function(u){return norm(u)===norm(a);})) uniq.push(a); });
+    if (uniq.length <= 4 && uniq.length < idxs.length) idxs.forEach(function(i){ map[i] = uniq; });
+  });
+  return map;
+}
+
+// ---------- views ----------
+function setCrumb(html, subject){ document.getElementById('crumb').innerHTML = html; if (subject) document.body.setAttribute('data-subject', subject); else document.body.removeAttribute('data-subject'); }
+function countFor(subject){ return Object.keys(REV).filter(function(k){ return REV[k].subject === subject; }).length; }
+
+function viewHome(){
+  setCrumb('منصات المراجعة <small>• الفصل الأول 2026 – 2027</small>');
+  document.getElementById('backBtn').hidden = true;
+  var w = el('div','wrap');
+  w.innerHTML = '<section class="hero"><p class="eyebrow">مراجعات الفصل الدراسي الأول 2026 – 2027</p><h1>راجِعْ دُروسَكَ بِطَريقَةٍ تَفاعُلِيَّةٍ قَبْلَ الاِمْتِحانِ</h1><p>اختر المادة، ثم صفّك. أجب عن الأسئلة لتعرف إجابتك فورًا، واستمع إلى السؤال، ونزّل المراجعة PDF للتدريب على الورق.</p></section>';
+  var g = el('div','portals');
+  Object.keys(SUBJECTS).forEach(function(s){ var S = SUBJECTS[s], n = countFor(s);
+    var a = el('a','portal '+S.cls); a.href = '#'+s;
+    a.innerHTML = '<span class="glyph">'+S.glyph+'</span><div class="ptitles"><div><h2>'+S.name+'</h2><p class="psub">'+S.sub+'</p></div><div dir="ltr" lang="en"><h2 class="pen">'+S.en+'</h2><p class="psub">'+S.ensub+'</p></div></div><p>'+S.desc+'</p><span class="count">'+(n ? n+' مراجعات متاحة الآن' : 'قريبًا')+'</span>';
+    g.appendChild(a); });
+  w.appendChild(g);
+  var h = el('div','howto');
+  h.innerHTML = '<div><b>إجابة فورية</b>تظهر النتيجة مباشرة: تشجيع عند الصواب، وشرح مبسّط مع الرجوع إلى النص عند الخطأ.</div><div><b>الصوت</b>اضغط زر «الصوت» في الأعلى لتشغيل القراءة والمؤثرات، أو استمع لأي سؤال من أيقونة السماعة.</div><div><b>نسخة PDF</b>نزّل المراجعة نفسها من صفحة الصف لحلّها على الورق.</div><div><b>لأولياء الأمور</b>اضغط «رمز المشاركة» لعرض رمز QR ورابط المنصة.</div>';
+  w.appendChild(h);
+  app.innerHTML = ''; app.appendChild(w);
+}
+function viewSubject(s){
+  var S = SUBJECTS[s];
+  setCrumb(S.name + ' <small>' + S.sub + '</small>', s);
+  document.getElementById('backBtn').hidden = false;
+  var w = el('div','wrap');
+  w.appendChild(el('div','shelf-head','<h1>'+S.name+' – '+S.sub+'</h1><p class="en">'+S.en+'</p><p>اختر صفّك لتبدأ المراجعة.</p>'));
+  var g = el('div','grades');
+  GRADES.forEach(function(gr){
+    if (s === 'social' && /^(KG1|KG2|G1[0-2])$/.test(gr[0])) return;
+    var id = Object.keys(REV).filter(function(k){ return REV[k].subject===s && REV[k].grade===gr[0]; })[0];
+    var c = el(id ? 'a' : 'div', 'grade ' + (id ? 'on' : 'off'));
+    if (id){ c.href = '#r-'+id; var st = load('rev-'+id, null); var pct = st && st.ans ? Object.keys(st.ans).length : 0; }
+    c.innerHTML = '<span class="g-num">'+gr[2]+'</span><span class="g-name">'+gr[1]+'</span><span class="g-state">'+(id ? (pct ? 'تابِعِ المُراجَعَةَ ←' : 'اِبْدَأِ المُراجَعَةَ ←') : 'تُضافُ قَريبًا')+'</span>';
+    if (id) c.style.textDecoration='none', c.style.color='inherit';
+    g.appendChild(c);
+  });
+  w.appendChild(g);
+  app.innerHTML=''; app.appendChild(w);
+}
+function viewRevision(id, secIdx){
+  var R = REV[id]; if (!R){ location.hash = ''; return; }
+  var S = SUBJECTS[R.subject]; var isB = R.subject === 'arabic-b' || R.subject === 'islamic-b'; CURLANG = R.lang || 'ar';
+  setCrumb(S.name + ' <small>' + S.sub + ' • ' + R.title + '</small>', R.subject);
+  document.getElementById('backBtn').hidden = false;
+  // split into sections
+  var sections = []; var curS = null; var gmap = prep(R.items);
+  R.items.forEach(function(it, i){ if (it.t === 'section'){ curS = {title: it.text, en: it.en, items: []}; sections.push(curS); } else { if (!curS){ curS = {title:'', items:[]}; sections.push(curS); } curS.items.push([it, i]); } });
+  if (sections.length < 2){ var hs = []; var cs = null; R.items.forEach(function(it, i){ if (it.t === 'section') return; if (it.t === 'heading' || !cs){ cs = {title: it.t === 'heading' ? (it.text.split(':')[0].length < 40 ? it.text.split(':')[0] : it.text.slice(0, 38) + '…') : '', items: []}; hs.push(cs); if (it.t === 'heading'){ cs.items.push([it, i]); return; } } cs.items.push([it, i]); }); if (hs.length > 1) sections = hs; }
+  var state = load('rev-'+id, null) || {ans:{}, sec:0};
+  // count scorable
+  var total = 0; R.items.forEach(function(it){ if (['mcq','tf','fill','open','arrange'].indexOf(it.t) >= 0) total++; else if (it.t==='match') total += it.pairs.length; else if (it.t==='cards') total += it.cards.length; else if (it.t==='picchoice') total++; else if (it.t==='classify') total += it.cols.reduce(function(a,c){ return a + (it.cols.every(function(x){return x.length<=1;}) ? Math.min(c.length,1) : c.length); },0); });
+  cur = {id:id, rev:R, sections:sections, state:state, total:total};
+  if (secIdx == null) secIdx = state.sec || 0; if (secIdx >= sections.length) secIdx = sections.length; state.sec = secIdx; if (!state.t0) state.t0 = Date.now(); save('rev-'+id, state);
+  var w = el('div','wrap');
+  var top = el('div','rev-top');
+  top.innerHTML = '<h1>'+esc(R.title)+(isB ? ' <span class="en" style="display:block;font-size:.55em">'+esc(R.en||'')+'</span>' : '')+'</h1><div class="meter"><span>إِجاباتٌ صَحيحَةٌ</span><span class="bar"><i id="meterBar"></i></span><span id="meterTxt"></span></div>';
+  var pdf = el('button','tbtn','<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>تنزيل PDF'); pdf.onclick = function(){ downloadPdf(R, id); };
+  var keyb = el('button','tbtn','<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>'+(R.lang==='en'?'Answer key PDF':'نَموذَجُ الإِجابَةِ PDF')); keyb.onclick = function(){ downloadPdf(R, id, true); };
+  var rst = el('button','tbtn','إِعادَةُ المُراجَعَةِ'); rst.onclick = function(){ if (rst.dataset.c){ save('rev-'+id, {ans:{}, sec:0}); viewRevision(id, 0); toast('بدأت المراجعة من جديد'); } else { rst.dataset.c = 1; rst.textContent = 'اضغط مرة أخرى للتأكيد'; setTimeout(function(){ rst.textContent='إِعادَةُ المُراجَعَةِ'; delete rst.dataset.c; }, 3000); } };
+  var tools = el('div',null); tools.style.cssText='display:flex;gap:8px;flex-wrap:wrap'; tools.appendChild(pdf); tools.appendChild(keyb); tools.appendChild(rst); top.appendChild(tools);
+  w.appendChild(top);
+  var nav = el('div','secnav'); nav.setAttribute('role','tablist');
+  sections.forEach(function(s, i){ var b = el('button', null, esc(s.title.replace(/^[^:]*:\s*/,'') || s.title)); b.title = s.title; b.setAttribute('aria-current', i===secIdx ? 'true':'false');
+    var keys = s.items.filter(function(p){ return ['mcq','tf','fill','open','arrange','picchoice'].indexOf(p[0].t)>=0; }).map(function(p){ return 'i'+p[1]; });
+    if (keys.length && keys.every(function(k){ return state.ans[k] != null; })) b.classList.add('done');
+    b.onclick = function(){ go(id, i); }; nav.appendChild(b); });
+  var rb = el('button',null,'النَّتيجَةُ'); rb.setAttribute('aria-current', secIdx===sections.length?'true':'false'); rb.onclick = function(){ go(id, sections.length); }; nav.appendChild(rb);
+  w.appendChild(nav);
+  document.body.classList.toggle('kg', !!R.kg);
+  var body = el('div'); if (R.lang === 'en'){ body.dir = 'ltr'; body.lang = 'en'; body.className = 'ltrbody'; }
+  if (secIdx < sections.length){
+    var s = sections[secIdx];
+    var st = el('h2','sec-title', esc(s.title) + (s.en ? '<span class="en">'+esc(s.en)+'</span>' : '')); body.appendChild(st);
+    var ctx = {};
+    s.items.forEach(function(p){ ctx.groupChoices = gmap[p[1]] || null; render(p[0], p[1], ctx, body, isB); });
+    var foot = el('div','secfoot');
+    var prev = el('button','btn ghost','→ القِسْمُ السّابِقُ'); prev.disabled = secIdx === 0; prev.onclick = function(){ go(id, secIdx-1); };
+    var next = el('button','btn', secIdx === sections.length-1 ? 'اعْرِضْ نَتيجَتي ←' : 'القِسْمُ التّالي ←'); next.onclick = function(){ go(id, secIdx+1); };
+    foot.appendChild(prev); foot.appendChild(next); body.appendChild(foot);
+  } else {
+    var a = state.ans, done = Object.keys(a).length, ok = Object.keys(a).filter(function(k){ return a[k]===1; }).length;
+    var pct = total ? Math.round(100*ok/total) : 0, stars = pct>=90?5:pct>=75?4:pct>=60?3:pct>=40?2:pct>0?1:0;
+    var msg = pct>=90 ? 'مُمْتازٌ! أَنْتَ مُسْتَعِدٌّ لِلامْتِحانِ تَمامًا.' : pct>=75 ? 'أَداءٌ رائِعٌ! راجِعِ الأَسْئِلَةَ القَليلَةَ الَّتي أَخْطَأْتَ فيها.' : pct>=50 ? 'جَيِّدٌ، وَبِالمُراجَعَةِ تَصِلُ إِلى الأَفْضَلِ.' : 'لا تَقْلَقْ! أَعِدِ المُراجَعَةَ قِسْمًا قِسْمًا، وَسَتُلاحِظُ تَحَسُّنَكَ.';
+    var r = el('div','result');
+    r.innerHTML = '<div class="stars" aria-label="'+stars+' من 5">'+'★'.repeat(stars)+'<span style="opacity:.25">'+'★'.repeat(5-stars)+'</span></div><div class="big">'+ok+' / '+total+'</div><p style="margin:.2em 0;color:var(--muted)">أَجَبْتَ عَنْ '+done+' سُؤالًا مِنْ '+total+'</p><p style="font-weight:700;color:var(--ink);font-size:1.1rem">'+msg+'</p>';
+    var again = el('button','btn','راجِعْ مِنَ البِدايَةِ'); again.onclick = function(){ go(id, 0); };
+    r.appendChild(again); body.appendChild(r);
+    body.appendChild(ratingCard(id, R, {ok:ok, total:total, done:done, pct:pct}, isB || R.lang==='en'));
+    if (sound) setTimeout(function(){ speak(msg); tone(true); }, 300);
+  }
+  w.appendChild(body);
+  app.innerHTML=''; app.appendChild(w); updateMeter();
+  var cn = nav.querySelector('[aria-current="true"]'); if (cn && cn.scrollIntoView) try{ cn.scrollIntoView({block:'nearest', inline:'center'}); }catch(e){}
+}
+function go(id, i){ cur.state.sec = i; save('rev-'+id, cur.state); viewRevision(id, i); window.scrollTo(0,0); }
+
+// ---------- pdf ----------
+var claudeDl = null, dlTried = false;
+function getDl(){
+  if (claudeDl) return Promise.resolve(claudeDl);
+  if (!(window.claude && window.claude.use)) return Promise.resolve(null);
+  return window.claude.use('downloads').then(function(d){ claudeDl = d; return d; }).catch(function(){ return null; });
+}
+setTimeout(getDl, 1500);
+var SUBFILE = {'arabic-a':'Arabic-A','arabic-b':'Arabic-B','islamic-a':'Islamic-A','islamic-b':'Islamic-B','social':'Social'};
+function downloadPdf(R, id, key){
+  var url = key ? 'pdf/key/'+id+'.pdf' : R.pdf;
+  var name = 'GEMS-Westminster-RAK-' + (SUBFILE[R.subject]||'') + '-' + R.grade + (key ? '-Answer-Key.pdf' : '-Revision.pdf');
+  toast('جارٍ تجهيز الملف…');
+  getDl().then(function(dl){
+    if (!dl){ pdfLink(url, name); return; }
+    return fetch(url).then(function(r){ if (!r.ok) throw {code:'http'}; return r.blob(); })
+      .then(function(b){ return dl.save({filename:name, data:b}); })
+      .then(function(){ toast('تم حفظ الملف'); })
+      .catch(function(e){ if (e && e.code==='declined') return; pdfLink(url, name); });
+  });
+}
+function pdfLink(url, name){
+  var old = document.getElementById('pdfbox'); if (old) old.remove();
+  var b = el('div','pdfbox'); b.id='pdfbox';
+  b.innerHTML = '<p>اضْغَطْ لِفَتْحِ المِلَفِّ أَوْ حِفْظِهِ:</p>';
+  var a = document.createElement('a'); a.href = url; a.download = name; a.target = '_blank'; a.rel = 'noopener'; a.className = 'btn'; a.textContent = '📄 ' + name.replace(/^GEMS-Westminster-RAK-/,'');
+  var x = el('button','tbtn','إِغْلاقٌ'); x.onclick = function(){ b.remove(); };
+  b.appendChild(a); b.appendChild(x); document.body.appendChild(b);
+}
+
+
+// ---------- student rating -> Google Sheet ----------
+// Paste the Google Apps Script Web App URL between the quotes (see the setup guide):
+var SHEET_URL = '';
+var FACES = [['😢','حَزينٌ','Sad'],['😕','لَمْ تُعْجِبْني','Not great'],['😐','عادِيَّةٌ','Okay'],['🙂','جَميلَةٌ','Good'],['😍','رائِعَةٌ جِدًّا','Amazing']];
+function sendRating(d){
+  try { var all = load('ratings', []); all.push(d); save('ratings', all.slice(-50)); } catch(e){}
+  if (!SHEET_URL) return Promise.resolve('local');
+  var body = JSON.stringify(d);
+  return fetch(SHEET_URL, {method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain;charset=utf-8'}, body:body}).then(function(){ return 'sent'; })
+    .catch(function(){ try { if (navigator.sendBeacon && navigator.sendBeacon(SHEET_URL, new Blob([body], {type:'text/plain'}))) return 'sent'; } catch(e){}
+      return 'local'; });
+}
+function ratingCard(id, R, sc, bi){
+  var E = function(ar, en){ return bi ? ar + ' <span class="en">'+en+'</span>' : ar; };
+  var done = load('rated-'+id, null);
+  var c = el('div','card ratecard');
+  if (done){ c.appendChild(el('div','qt', E('شُكْرًا لَكَ! سَجَّلْنا تَقْييمَكَ لِهذِهِ المُراجَعَةِ. 💛','Thank you! Your rating was saved.'))); c.appendChild(certBtn(R, sc, done.name, bi)); return c; }
+  c.appendChild(el('h3','rt', E('قَيِّمْ تَجْرِبَتَكَ مَعَ المُراجَعَةِ','Rate your revision experience')));
+  var st = {happy:0, helped:'', clear:'', feedback:'', liked:{}};
+  c.appendChild(el('div','qt', E('كَيْفَ شَعَرْتَ وَأَنْتَ تُراجِعُ؟','How did you feel while revising?')));
+  var fr = el('div','faces');
+  FACES.forEach(function(f, i){ var b = el('button','face','<span>'+f[0]+'</span><small>'+(bi?f[2]:f[1])+'</small>'); b.type='button'; b.setAttribute('aria-pressed','false'); b.setAttribute('aria-label', f[1]);
+    b.onclick = function(){ st.happy = i+1; fr.querySelectorAll('.face').forEach(function(x,j){ x.setAttribute('aria-pressed', j===i?'true':'false'); }); tone(true); }; fr.appendChild(b); });
+  c.appendChild(fr);
+  [['helped','هَلْ ساعَدَتْكَ المُراجَعَةُ عَلى الاسْتِعْدادِ لِلامْتِحانِ؟','Did the revision help you prepare?'],['clear','هَلْ كانَتِ الأَسْئِلَةُ واضِحَةً؟','Were the questions clear?'],['feedback','هَلْ أَعْجَبَكَ الشَّرْحُ عِنْدَ الخَطَأِ؟','Did you like the explanations?']].forEach(function(q){
+    var row = el('div','yn'); row.appendChild(el('span',null,E(q[1],q[2])));
+    var g = el('div','yng'); [['yes','نَعَمْ','Yes'],['no','لا','No']].forEach(function(o){ var b = el('button','chip',bi?o[1]+' / '+o[2]:o[1]); b.type='button'; b.setAttribute('aria-pressed','false');
+      b.onclick = function(){ st[q[0]] = o[0]; g.querySelectorAll('.chip').forEach(function(x){ x.setAttribute('aria-pressed', x===b?'true':'false'); }); }; g.appendChild(b); });
+    row.appendChild(g); c.appendChild(row); });
+  c.appendChild(el('div','qt', E('ما أَكْثَرُ شَيْءٍ أَعْجَبَكَ؟ (اخْتَرْ ما تَشاءُ)','What did you like most? (choose any)')));
+  var lk = el('div','yng wrap');
+  [['sound','الصَّوْتُ','Sound'],['praise','التَّشْجيعُ','Encouragement'],['explain','الشَّرْحُ','Explanations'],['pics','الصُّوَرُ','Pictures'],['pdf','مِلَفُّ PDF','PDF']].forEach(function(o){ var b = el('button','chip',bi?o[1]+' / '+o[2]:o[1]); b.type='button'; b.setAttribute('aria-pressed','false');
+    b.onclick = function(){ st.liked[o[0]] = !st.liked[o[0]]; b.setAttribute('aria-pressed', st.liked[o[0]]?'true':'false'); }; lk.appendChild(b); });
+  c.appendChild(lk);
+  var cm = document.createElement('textarea'); cm.className='rin'; cm.maxLength = 300; cm.rows = 2; cm.placeholder = bi ? 'تَعْليقٌ (اخْتِيارِيٌّ) – Comment (optional)' : 'اُكْتُبْ تَعْليقًا قَصيرًا (اخْتِيارِيٌّ)'; c.appendChild(cm);
+  var nr = el('div','nr');
+  var nm = document.createElement('input'); nm.className='rin'; nm.maxLength = 60; nm.placeholder = bi ? 'الاسْمُ (اخْتِيارِيٌّ) – Name (optional)' : 'اسْمُكَ (اخْتِيارِيٌّ)';
+  var cl = document.createElement('input'); cl.className='rin'; cl.maxLength = 12; cl.placeholder = bi ? 'الشُّعْبَةُ – Class (e.g. 7B)' : 'الشُّعْبَةُ (مِثْلُ 7B)';
+  try { var me = load('me', {}); nm.value = me.name || ''; cl.value = me.cls || ''; } catch(e){}
+  nr.appendChild(nm); nr.appendChild(cl); c.appendChild(nr);
+  var msg = el('div','rmsg'); var go = el('button','btn', E('أَرْسِلْ تَقْييمي','Send my rating'));
+  go.onclick = function(){
+    if (!st.happy){ msg.innerHTML = E('اخْتَرْ وَجْهًا يُعَبِّرُ عَنْ شُعورِكَ أَوَّلًا 🙂','Please choose a face first 🙂'); return; }
+    go.disabled = true;
+    var cs = cur.state || {}; var mins = cs.t0 ? Math.max(1, Math.round((Date.now()-cs.t0)/60000)) : '';
+    var name = nm.value.trim().slice(0,60), cls = cl.value.trim().slice(0,12);
+    try { save('me', {name:name, cls:cls}); } catch(e){}
+    var d = {ts:new Date().toISOString(), subject:R.subject, subjectName:(SUBJECTS[R.subject]||{}).en||'', grade:R.grade, revision:id, title:R.title,
+      name:name, section:cls, happy:st.happy, helped:st.helped, clear:st.clear, feedback:st.feedback, liked:Object.keys(st.liked).filter(function(k){return st.liked[k];}).join(', '),
+      comment:cm.value.trim().slice(0,300), score:sc.ok, total:sc.total, answered:sc.done, percent:sc.pct, minutes:mins, source:location.hostname || 'file'};
+    sendRating(d).then(function(){ save('rated-'+id, {name:name, at:d.ts}); c.innerHTML = ''; c.appendChild(el('div','qt', E('شُكْرًا لَكَ! وَصَلَ تَقْييمُكَ. 💛','Thank you! Your rating was sent.'))); c.appendChild(certBtn(R, sc, name, bi));
+      if (document.body.classList.contains('kg') || st.happy >= 4) confetti(c); if (sound) speak('شكرًا لك'); });
+  };
+  c.appendChild(go); c.appendChild(msg);
+  return c;
+}
+function certBtn(R, sc, name, bi){
+  var b = el('button','btn alt', bi ? '🏅 شَهادَةُ الإِنْجازِ – Certificate' : '🏅 احْصُلْ عَلى شَهادَةِ الإِنْجازِ'); b.style.marginTop = '10px';
+  b.onclick = function(){
+    var cv = document.createElement('canvas'); cv.width = 1400; cv.height = 990; var x = cv.getContext('2d');
+    var S = SUBJECTS[R.subject] || {}; var acc = getComputedStyle(document.body).getPropertyValue('--acc').trim() || '#0f7a5c';
+    x.fillStyle = '#fffdf6'; x.fillRect(0,0,1400,990); x.strokeStyle = acc; x.lineWidth = 18; x.strokeRect(30,30,1340,930); x.lineWidth = 3; x.strokeRect(58,58,1284,874);
+    x.textAlign = 'center'; x.direction = 'rtl'; x.fillStyle = acc;
+    x.font = '700 72px "Noto Naskh Arabic", "Amiri", serif'; x.fillText('شَهادَةُ إِنْجازٍ', 700, 210);
+    x.fillStyle = '#333'; x.font = '400 34px "Noto Naskh Arabic", serif'; x.fillText('تُمْنَحُ هذِهِ الشَّهادَةُ لِلطّالِبِ / لِلطّالِبَةِ', 700, 300);
+    x.fillStyle = '#111'; x.font = '700 64px "Noto Naskh Arabic", serif'; x.fillText(name || 'البَطَلِ المُجْتَهِدِ', 700, 400);
+    x.fillStyle = '#333'; x.font = '400 34px "Noto Naskh Arabic", serif'; x.fillText('لِإِتْمامِ ' + R.title + ' – ' + (S.name||'').replace(/[ً-ْ]/g,''), 700, 480);
+    x.font = '700 46px "Noto Naskh Arabic", serif'; x.fillStyle = acc; x.fillText('النَّتيجَةُ: ' + sc.ok + ' / ' + sc.total + '   ' + '★'.repeat(Math.max(1, Math.round(sc.pct/20))), 700, 570);
+    x.fillStyle = '#555'; x.font = '400 30px "Noto Naskh Arabic", serif'; x.fillText('قِسْمُ المَوادِّ الوِزارِيَّةِ – مَدْرَسَةُ جيمس وِسْتْمِنِسْتَر – رَأْسُ الخَيْمَةِ', 700, 690);
+    x.direction = 'ltr'; x.font = '400 28px sans-serif'; x.fillText('Certificate of Achievement • ' + new Date().toLocaleDateString('en-GB'), 700, 760);
+    x.font = '120px serif'; x.fillText('🏅', 700, 900);
+    cv.toBlob(function(blob){ var fn = 'Certificate-' + (R.grade||'') + '.png';
+      getDl().then(function(d){ if (d){ d.save({filename:fn, data:blob}).then(function(){ toast('تم حفظ الشهادة'); }).catch(function(e){ if (!e || e.code !== 'declined') dl(); }); } else dl(); });
+      function dl(){ var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = fn; document.body.appendChild(a); a.click(); a.remove(); } }, 'image/png');
+  };
+  return b;
+}
+
+// ---------- share ----------
+function shareUrl(){ var h = location.hostname; if (SHARE_URL && !/github\.io|gemsrak|gemswestminster/i.test(h)) return SHARE_URL; return location.origin + location.pathname; }
+document.getElementById('shareBtn').onclick = function(){
+  var url = shareUrl();
+  var m = el('div','modal'); m.setAttribute('role','dialog'); m.setAttribute('aria-modal','true');
+  var s = el('div','sheet');
+  s.innerHTML = '<h2>منصات المراجعة – مدرسة جيمس وستمنستر</h2><p style="margin:0;color:var(--muted);font-size:.92rem">امسح الرمز بكاميرا الهاتف لفتح المنصة</p>';
+  var q = el('div','qrbox'); var qd = el('div'); q.appendChild(qd); var lg = el('img','qlogo'); lg.src='img/badge.png'; lg.alt=''; q.appendChild(lg); s.appendChild(q);
+  try{ new QRCode(qd, {text:url, width:520, height:520, colorDark:'#16325c', colorLight:'#ffffff', correctLevel: QRCode.CorrectLevel.H}); }catch(e){ qd.textContent = 'تعذّر إنشاء الرمز'; }
+  var u = el('div','urlbox', esc(url)); s.appendChild(u);
+  var row = el('div','self'); row.style.justifyContent='center';
+  var cp = el('button','btn small','نسخ الرابط'); cp.onclick = function(){ try{ navigator.clipboard.writeText(url).then(function(){ toast('تم نسخ الرابط'); }, function(){ selectText(u); }); }catch(e){ selectText(u); } };
+  var cl = el('button','btn ghost small','إغلاق'); cl.onclick = function(){ m.remove(); };
+  row.appendChild(cp); row.appendChild(cl); s.appendChild(row);
+  m.appendChild(s); m.onclick = function(e){ if (e.target === m) m.remove(); };
+  document.body.appendChild(m); cl.focus();
+};
+function selectText(n){ try{ var r = document.createRange(); r.selectNodeContents(n); var sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); toast('حدّد الرابط وانسخه'); }catch(e){} }
+var tt; function toast(t){ var o = document.querySelector('.toast'); if (o) o.remove(); var e = el('div','toast',esc(t)); document.body.appendChild(e); clearTimeout(tt); tt = setTimeout(function(){ e.remove(); }, 2200); }
+
+// ---------- router ----------
+document.getElementById('backBtn').onclick = function(){ var h = location.hash.slice(1); if (h.indexOf('r-')===0 && REV[h.slice(2)]) location.hash = REV[h.slice(2)].subject; else location.hash = ''; };
+function route(){
+  if ('speechSynthesis' in window) try{ speechSynthesis.cancel(); }catch(e){}
+  var h = location.hash.slice(1);
+  if (SUBJECTS[h]) viewSubject(h);
+  else if (h.indexOf('r-')===0 && REV[h.slice(2)]) viewRevision(h.slice(2));
+  else viewHome();
+  window.scrollTo(0,0);
+}
+window.addEventListener('hashchange', route); route();
+})();
+</script>
+</body></html>
